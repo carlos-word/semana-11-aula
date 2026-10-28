@@ -14,8 +14,10 @@ class alunoTest(unittest.TestCase):
     self.turma.cadastrarAlunos([self.aluno]);
     self.conexao = ConexaoClass.conexaoMongoDB(self, url = 'localhost.com', banco = 'faculdade')
 
-  def test_salvarAluno(self):   
-    print('Escreva o seu método aqui...')
+   def test_salvarAluno(self):
+    resposta = self.aluno.salvar(conexao = self.conexao, colecao = 'aluno');
+    self.assertEqual(True, resposta, 'Aluno cadastrado incorretamente!');
+    self.assertEqual(1, self.conexao['aluno'].count_documents({'nome': 'Fabio', 'sobrenome': 'Teixeira', 'nota': 10}), 'Aluno nao foi encontrado no banco!');
 
   def test_salvarTurma(self):   
     resposta = self.turma.salvar(conexao = self.conexao, colecao = 'turma');  
