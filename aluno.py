@@ -7,5 +7,7 @@ class AlunoClass:
   def mostrarAluno(self):
     return 'Aluno: ' + self.nome + ' ' + self.sobrenome + ' - Nota: ' + str(self.nota);    
 
-  def salvar(self, conexao, colecao):    
-    print('Escreva o seu método aqui...')
+    def salvar(self, conexao, colecao):
+    mydict = dict(self.__dict__);
+    x = conexao[colecao].insert_one(mydict);
+    return x.acknowledged;
